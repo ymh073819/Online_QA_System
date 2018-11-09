@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+
+<body background="/static/img/c.jpg" >
+
+<p style="color: red;">
+You have already logged in.Username: {{username}}
+     </p>
+    <table width="1000" height="105" border="1" align="center">
+<tr>
+<th width="700">问题列表</th>
+<th width="100">提问者</th>
+
+
+
+</tr>
+
+
+{% for Article in all_objects reversed %}
+    <tr>
+        <td><a href="http://127.0.0.1:8000/article/?id={{Article.id}}"><font color="black">{{Article.title}}</font></a></td>
+    <td><div class="aa">{{Article.author}}
+    {% if not attentioned_author %}
+        {% ifequal username Article.author %}
+            <div class="bb"><a>不能关注或取消关注自己</a></div>
+        {% else %}
+            <div class="bb"><a href="http://127.0.0.1:8000/view_all_attention/?id={{ Article.id }}">关注</a></div>
+        {% endifequal %}
+    {% else %}
+        {% for i in attentioned_author %}
+            {% ifequal i.to_friend Article.user%}
+                <div class="bb"><a href="http://127.0.0.1:8000/cancel_view_all_attention/?id={{ Article.id }}">取消关注</a></div>
+            {% else %}
+                 {% ifequal username Article.author %}
+                    <div class="bb"><a>不能关注或取消关注自己</a></div>
+                 {% else %}
+                    <div class="bb"><a href="http://127.0.0.1:8000/view_all_attention/?id={{ Article.id }}">关注</a></div>
+                {% endifequal %}
+            {% endifequal %}
+        {% endfor %}
+    {% endif %}
+{% endfor %}
+
+
+      </div>
+      </td>
+    </tr>
+
+
+
+</table>
+
+</body>
+</html>

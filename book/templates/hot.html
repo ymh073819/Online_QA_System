@@ -1,0 +1,67 @@
+<html >
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>view all</title>
+<style type="text/css">
+</style>
+</head>
+
+<body background="/static/img/c.jpg">
+
+             <p style="color: red;">
+                You have already logged in.Username: {{username}}
+             </p>
+
+             <div class="container">
+	<div class="row clearfix">
+		<div class="col-md-12 column">
+			<nav class="navbar navbar-default" role="navigation">
+
+
+
+				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+					<ul class="nav navbar-nav">
+						<li class="active">
+
+
+
+							 <a href="http://127.0.0.1:8000/logout/"><p style="color: black;">注销</p></a>
+						</li>
+
+                        <li>
+                <a href="http://127.0.0.1:8000/view_all/" ><p style="color: black;">返回</p></a>
+
+
+						</li>
+
+					</ul>
+
+
+				</div>
+
+			</nav>
+		</div>
+	</div>
+</div>
+
+
+<table width="1000" height="105" border="1" align="center">
+<tr>
+<th width="700">标题</th>
+<th width="100">提问者</th>
+<th width="100">回答数</th>
+
+
+</tr>
+
+{% for Article in all_article reversed%}
+  <tr>
+      <td><a href="http://127.0.0.1:8000/article/?id={{Article.id}}">{{Article.title}}</a></td>
+    <td>{{Article.author}}</td>
+    <td>{{Article.answer_number}}</td>
+
+
+  </tr>
+{% endfor %}
+</table>
+</body>

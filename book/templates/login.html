@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Welcome login </title>
+</head>
+<body background="/static/img/c.jpg">
+    <p align="center" size="100">登录问答系统</p>
+    <p align="center" size="100">发现更大的世界</p>
+
+    {% if errors %}
+        <li>
+            {% for error in errors %}
+             <p style="color: red;">
+                Please correct the error: {{error}} below.
+             </p>
+              {% endfor %}
+        </li>
+    {% endif %}
+
+    <form action="" method="post" align="center">
+        {% csrf_token %}
+        <input type = 'text' placeholder="Please input account" name="account">
+       <br>
+
+        <input type = 'password' placeholder="Please input password" name="password">
+        <br>
+        <input type = 'submit' placeholder="Login" value="Login">
+        <br>
+        <a href="http://127.0.0.1:8000/register/">register new accout</a>
+    </form>
+
+</body>
+</html>

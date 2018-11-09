@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>回复提醒</title>
+</head>
+<body>
+{% for Answer in all_answer %}
+
+        {% for Article in article %}
+            {% ifequal Article Answer.article_id %}
+                <h1 align="center"> {{ Answer.author }}回答了你的问题:<a href="http://127.0.0.1:8000/article/?id={{Article.id}}">{{Article.title}}</a></h1>
+            {% endifequal %}
+        {% endfor %}
+
+{% endfor %}
+</body>
+</html>

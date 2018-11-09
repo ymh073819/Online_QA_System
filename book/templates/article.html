@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{article.title}}</title>
+</head>
+<body background="/static/img/c.jpg">
+
+<table width="600" height="100" border="1" align="center">
+
+<form action='' method='GET'>
+  <tr>
+    <td colspan="3" style="background-color:#99bbbb;" align="center">
+    <font size="5px">{{article.title}}</font>
+    </td>
+  </tr>
+{% if has_polled %}
+<tr>
+    <td><a href="http://127.0.0.1:8000/deletepoll/?id={{article.id}}">取消赞</a></td>
+    <td>{{poll_num}}</td>
+  </tr>
+    {% else %}
+    <tr>
+    <td><a href="http://127.0.0.1:8000/poll/?id={{article.id}}">点赞</a></td>
+    <td>{{poll_num}}</td>
+  </tr>
+{% endif %}
+    <tr>
+    <td height="30" width='100' align="center">提问者:</td>
+        <td>{{article.author}} </td>
+    </tr>
+
+    <tr>
+    <td height="100" width='100' align="center">问题详情:</td>
+        <td>{{article.content}} </td>
+    </tr>
+
+    {% for Answer in all_answer %}
+        {% if Answer.img %}
+        <tr>
+    <td >回复内容</td>
+  <td>{{Answer.content}}</td>
+        </tr>
+        <tr>
+        <td>回复者</td>
+      <td>{{Answer.author}}</td>
+  </tr>
+        <tr>
+        <td>图片</td>
+      <td height="100" width='100'><img src="/media/{{ Answer.img }}" height="50" width="50"></td>
+  </tr>
+        {% else %}
+        <tr>
+    <td >回复内容</td>
+  <td>{{Answer.content}}</td>
+        </tr>
+        <tr>
+        <td>回复者</td>
+      <td>{{Answer.author}}</td>
+  </tr>
+        {% endif %}
+{% endfor %}
+
+    <td><a href="http://127.0.0.1:8000/answer/?id={{article.id}}">回答</a></td>
+    <td><a href="http://127.0.0.1:8000/view_all/">返回</a></td>
+<style type="text/css">
+input.form {
+  position: absolute;
+  left: 650px;
+  top: 320px;
+}
+</style>
+</form>
+</table>
+</body>
+</html>

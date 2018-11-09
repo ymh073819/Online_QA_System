@@ -1,0 +1,48 @@
+﻿<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>ask a question</title>
+</head>
+<body background="/static/img/c.jpg">
+<p style="color: red;">
+                You have already logged in.Username: {{username}}
+             </p>
+<table width="300" height="300" border="1" align="center">
+<form action='' method='GET'>
+  <tr>
+    <td colspan="3" style="background-color:#99bbbb;" align="center">
+    <font size="5px">欢迎提问</font>
+    </td>
+  </tr>
+
+
+    <tr>
+    <td height="30" width='100' align="center">title:</td>
+    <td><input name="tit" cols="40" type="text"></input></td>
+    <td> <font color='#99bbbb'>必填</font></td>
+  </tr>
+
+
+    <tr>
+    <td height="30" width='100' align="center">问题描述:</td>
+        <td> <textarea name="con" cols="20" rows="10"></textarea></td>
+    </tr>
+<style type="text/css">
+input.form {
+  position: absolute;
+  left: 650px;
+  top: 320px;
+}
+input.form1 {
+  position: absolute;
+  left: 700px;
+  top: 320px;
+}
+</style>
+<input type="submit" value="提交" align="center" class = "form"> </input>
+<input type="botton" value="返回" align="center" class="form1" style="width:60px;height:25px;" onclick="javascript:history.back();"></input>
+</form>
+</table>
+
+</body>
+</html>

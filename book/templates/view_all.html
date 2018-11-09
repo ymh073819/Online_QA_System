@@ -1,0 +1,109 @@
+<html >
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>view all</title>
+<style>
+.aa{width:100px;height:30px;position:relative}
+.aa .bb{width:100px;height:60px;position:absolute;display:none;border:1px solid #ddd;top:30px;right:0}
+
+.aa:hover .bb{display:block}
+</style>
+
+
+
+    
+</head>
+
+<body background="/static/img/c.jpg" >
+
+<p style="color: red;">
+You have already logged in.Username: {{username}}
+     </p>
+    
+
+<ul class="nav navbar-nav">
+						<li class="active">
+                            <a href="http://127.0.0.1:8000/logout/"><p style="color: black;">注销</p></a>
+						</li>
+						<li>
+							 <a href="http://127.0.0.1:8000/post/"><p style="color: black;">提问</p></a>
+						</li>
+                        <li>
+                <a href="http://127.0.0.1:8000/view_all/" ><p style="color: black;">问题列表</p></a>
+                        </li>
+                        <li>
+                <a href="http://127.0.0.1:8000/hot/" ><p style="color: black;">热点话题</p></a>
+                        </li>
+
+
+                        <li>
+                        <a href="http://127.0.0.1:8000/new_msg/" ><p style="color: black;">新消息</p></a>
+                        </li>
+
+                        <li>
+                        <a href="http://127.0.0.1:8000/personal_inf/?username={{ username }}" ><p style="color: black;">个人设置</p></a>
+                        </li>
+
+
+</ul>
+
+{% if error %}
+        <li>
+            
+             <p style="color: red;">
+                关键字不能为空
+             </p>
+             
+        </li>
+    {% endif %}
+
+<form action="" method="GET" align="center">
+  {% csrf_token %}
+  <input type = 'text' placeholder="请输入关键字" name="keyword">
+  <button type="submit">搜索</button>
+</form>
+
+<table width="1000" height="105" border="1" align="center">
+<tr>
+<th width="700">问题列表</th>
+<th width="100">提问者</th>
+
+
+
+</tr>
+
+
+{% for Article in all_objects reversed %}
+    <tr>
+        <td><a href="http://127.0.0.1:8000/article/?id={{Article.id}}"><font color="black">{{Article.title}}</font></a></td>
+    <td><div class="aa">{{Article.author}}
+    {% if not attentioned_author %}
+        {% ifequal username Article.author %}
+            <div class="bb"><a>不能关注或取消关注自己</a></div>
+        {% else %}
+            <div class="bb"><a href="http://127.0.0.1:8000/view_all_attention/?id={{ Article.id }}">关注</a></div>
+        {% endifequal %}
+    {% else %}
+        {% for i in attentioned_author %}
+            {% ifequal i.to_friend Article.user%}
+                <div class="bb"><a href="http://127.0.0.1:8000/cancel_view_all_attention/?id={{ Article.id }}">取消关注</a></div>
+            {% else %}
+                 {% ifequal username Article.author %}
+                    <div class="bb"><a>不能关注或取消关注自己</a></div>
+                 {% else %}
+                    <div class="bb"><a href="http://127.0.0.1:8000/view_all_attention/?id={{ Article.id }}">关注</a></div>
+                {% endifequal %}
+            {% endifequal %}
+        {% endfor %}
+    {% endif %}
+{% endfor %}
+
+
+      </div>
+      </td>
+    </tr>
+
+
+
+</table>
+</body>
